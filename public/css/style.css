@@ -1,0 +1,16 @@
+.data-set {
+	padding: 5px;
+}
+
+input.ng-invalid {
+	border: 1px solid red;
+}
+
+.input-control {
+	border-radius: 5px;
+	padding: 2px;
+}
+
+.table-responsive, .table>tbody>tr>td  {
+	border: none;
+}

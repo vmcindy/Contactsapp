@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Contact List App</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script type="text/javascript" src="js/controllers/controller.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="AppCtrl"> 
+	<h1>Contact List App</h1>
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Group</th>
+				<th>Number</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="contact in contactlist">
+				<td><input type="checkbox"></td>
+				<td>{{contact.name}}</td>
+				<td>{{contact.email}}</td>
+				<td>{{contact.group}}</td>
+				<td>{{contact.number}}</td>
+				<td>
+					<button id="edit" class="btn btn-warning edit" ng-click="edit(contact._id)" data-toggle="modal" data-target="#myModal">
+						<i class="fa fa-pencil"></i>
+					</button>
+					<button class="btn btn-danger" ng-click="remove(contact._id)">
+						<i class="fa fa-trash-o"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<button id="add" class="btn btn-primary btn-lg" ng-click="add()" data-toggle="modal" data-target="#myModal">
+		Add Contact&nbsp;
+		<i class="fa fa-user-plus"></i>
+	</button>
+<!-- Modal-Start -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Add/Update Contact:</h4>
+      	</div>
+      	<div class="modal-body data-set">
+      	<form name="frm" novalidate>
+      		<table class="table table-responsive">
+      			<tr>
+      			<td><label>Name</label></td>
+				<td>
+					<input type="text"name="name" class="input-control" ng-model="contact.name" required>
+					<span ng-show="frm.name.$dirty && frm.name.$error.required">Required</span>
+				</td>
+				</tr>
+				<tr>
+				<td><label>Email</label></td>
+				<td>
+					<input type="email" name="email" class="input-control" ng-model="contact.email" required>
+					<span ng-show="frm.email.$dirty && frm.email.$error.required">Required</span>
+					<span ng-show="frm.email.$error.email">Not valid email</span>
+				</td>
+				</tr>
+				<tr>
+				<td><label>Group</label></td>
+				<td>
+					<input type="text" name="group" class="input-control" ng-model="contact.group" required>
+					<span ng-show="frm.group.$dirty && frm.group.$error.required ">Required</span>
+					<button id="addGroup" class="btn btn-primary" ng-click="addGroup()"><i class="fa fa-plus"></i></button>
+				</td>
+				</tr>
+				<tr>
+				<td><label>Number</label></td>
+				<td>
+					<input type="text" name="number" class="input-control" ng-model="contact.number" required>
+					<span ng-show="frm.number.$dirty && frm.number.$error.required">Required</span>
+				</td>
+				</tr>
+			</table>
+		</form>
+      	</div>
+      	<div class="modal-footer">
+			<button id="reset" class="btn btn-info" ng-click="deselect()">Clear&nbsp;<i class="fa fa-exclamation"></i></button>
+	        <button id="update" class="btn btn-primary" ng-disabled="frm.name.$error.required || frm.email.$error.required || frm.email.$error.email || frm.number.$error.required" data-dismiss="modal" ng-click="update()">Update&nbsp;<i class="fa fa-floppy-o"></i></button>
+	        <button id="addContact" class="btn btn-primary" ng-disabled="frm.name.$untouched || frm.name.$error.required || frm.email.$untouched || frm.email.$error.required || frm.email.$error.email ||frm.number.$untouched || frm.number.$error.required" data-dismiss="modal" ng-click="addContact()">Add Contact&nbsp;<i class="fa fa-floppy-o"></i></button>
+      	</div>
+    </div>
+  </div>
+</div>
+<section
+<!-- Modal-End -->
+</div>
+
+</body>
+</html>
+
+
